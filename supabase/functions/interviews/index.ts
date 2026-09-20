@@ -32,6 +32,10 @@ import { json, text, idFromPath } from '../_shared/http.ts'
 
 const ALLOWED_STATUS = ['planned', 'completed', 'cancelled']
 
+// edge function = just this handler, no server of our own. Supabase spins it up
+// per request, on a node close to the caller, and tears it down after. One
+// function per endpoint (or a few related ones), which is why the url is
+// /functions/v1/interviews and the method decides what happens.
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return new Response('ok', { headers: corsHeaders })

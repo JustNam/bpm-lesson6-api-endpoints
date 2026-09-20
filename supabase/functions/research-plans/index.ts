@@ -29,6 +29,7 @@ import { json, text, idFromPath } from '../_shared/http.ts'
  *   500 database error
  */
 
+// same deal as interviews/index.ts: runs on request, nothing to keep alive
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return new Response('ok', { headers: corsHeaders })
