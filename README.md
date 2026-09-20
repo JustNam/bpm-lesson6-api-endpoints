@@ -44,3 +44,10 @@ Design is in the doc block at the top of `supabase/functions/research-plans/inde
 ```
 curl http://127.0.0.1:54321/functions/v1/research-plans/<id>
 ```
+
+## Questions for mentors
+
+- Example A passes an unhandled Postgres error straight to the client as `error.message`. Is that ever fine in a real product, or is logging server-side + a generic client message the actual practice - where's the line?
+- Our `GET /research-plans/:id` returns interviews and nested research questions in one response. At what size or nesting depth does CLRA split that into paginated requests, and who decides - frontend or backend first?
+- Homework skipped auth, but marking an interview completed should really only be allowed by that plan's owner. Is that an RLS policy checking `auth.uid()`, or an explicit ownership check inside the edge function - or both?
+- If the same PATCH request gets sent twice (double click, or a retried request on a flaky connection), does this need to be idempotent, and how does CLRA actually handle that?
